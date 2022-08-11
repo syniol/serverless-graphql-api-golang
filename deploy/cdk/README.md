@@ -1,15 +1,19 @@
-# Welcome to your CDK Go project!
-
-This is a blank project for Go development with CDK.
-
-**NOTICE**: Go support is still in Developer Preview. This implies that APIs may
-change while we address early feedback from the community. We would love to hear
-about your experience through GitHub issues.
+# IaC with AWS CDK in Golang
 
 
 ## Dev Setup Commands
 
  * `go mod download`
+ * `docker build -t cdk:node . -f deploy/cdk/Dockerfile`
+ * `docker run -v (pwd):/var/local/pipeline --rm -it cdk:node bash`
+ * `docker build -t cdk:node . -f deploy/cdk/Dockerfile --build-arg AWS_KEY=opwhb2232 --build-arg AWS_SECRET=7862ghhhgy3`
+
+
+## Build Args (Docker Image Pipeline to Deploy with CDK)
+ * `AWS_KEY`
+ * `AWS_SECRET`
+ * `CDK_DEFAULT_ACCOUNT`
+ * `CDK_DEFAULT_REGION`
 
 
 ## Useful commands

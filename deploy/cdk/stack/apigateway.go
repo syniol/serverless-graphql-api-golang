@@ -1,9 +1,10 @@
 package stack
 
 import (
-	"cdk/construct"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/constructs-go/constructs/v10"
+
+	"cdk/construct"
 )
 
 func NewAPIGateWayStack(

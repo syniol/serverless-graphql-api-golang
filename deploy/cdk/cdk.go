@@ -1,9 +1,11 @@
 package main
 
 import (
-	"cdk/stack"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/jsii-runtime-go"
+	"os"
+
+	"cdk/stack"
 )
 
 func main() {
@@ -23,7 +25,7 @@ func main() {
 func env() *awscdk.Environment {
 	//return nil
 	return &awscdk.Environment{
-		Account: jsii.String("267519217152"),
-		Region:  jsii.String("eu-west-2"),
+		Account: jsii.String(os.Getenv("CDK_DEFAULT_ACCOUNT")),
+		Region:  jsii.String(os.Getenv("CDK_DEFAULT_REGION")),
 	}
 }
