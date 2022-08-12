@@ -11,7 +11,7 @@ the deployed lambda.
 todo: add Diagram
 
 
-## AWS Lambda & API GateWay
+## AWS Lambda & API Gateway
 todo: add information about trigger point
 
 

@@ -1,9 +1,10 @@
-package graphql
+package app
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"homadrone/app/graphql"
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -25,7 +26,7 @@ func NewLambda(
 		request.RequestContext.RequestID,
 	)
 
-	res, err := NewGraphQLExecution(ctx, Schema, request.Body)
+	res, err := graphql.NewGraphQLExecution(ctx, graphql.Schema, request.Body)
 	if err != nil {
 		return events.APIGatewayProxyResponse{
 			Body:       err.Error(),

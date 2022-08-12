@@ -2,10 +2,9 @@ package main
 
 import (
 	"github.com/aws/aws-lambda-go/lambda"
-
-	"homadrone/app/graphql"
+	lambda2 "homadrone/app"
 )
 
 func main() {
-	lambda.Start(graphql.NewLambda)
+	lambda.Start(lambda2.NewLambda)
 }

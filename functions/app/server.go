@@ -1,11 +1,12 @@
-package graphql
+package app
 
 import (
 	"fmt"
+	"homadrone/app/graphql"
 	"net/http"
 	"os"
 
-	"github.com/graphql-go/graphql"
+	graphqlLib "github.com/graphql-go/graphql"
 )
 
 var PortNumber = func() string {
@@ -16,9 +17,9 @@ var PortNumber = func() string {
 	return "8080"
 }
 
-func NewHttpServer(schema graphql.Schema) {
+func NewHttpServer(schema graphqlLib.Schema) {
 	http.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
-		PostRequest(w, req, schema)
+		graphql.PostRequest(w, req, schema)
 	})
 
 	fmt.Println(fmt.Sprintf(
