@@ -3,16 +3,18 @@ package main
 import (
 	"os"
 
-	"github.com/aws/aws-cdk-go/awscdk/v2"
+	"github.com/aws/aws-cdk-go/awscdk"
 	"github.com/aws/jsii-runtime-go"
 
 	"cdk/stack"
 )
 
 func main() {
-	app := awscdk.NewApp(nil)
+	app := awscdk.NewApp(&awscdk.AppProps{
+		Context: &map[string]interface{}{},
+	})
 
-	stack.NewAPIGateWayStack(
+	stack.NewServerlessAPIStack(
 		app,
 		"ServerlessGraphQLAPIStack",
 		nil,

@@ -4,20 +4,24 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/aws/aws-cdk-go/awscdk/v2"
-	iam "github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
-	lambda "github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
-	s3assets "github.com/aws/aws-cdk-go/awscdk/v2/awss3assets"
-	"github.com/aws/constructs-go/constructs/v10"
+	"github.com/aws/aws-cdk-go/awscdk"
+	iam "github.com/aws/aws-cdk-go/awscdk/awsiam"
+	lambda "github.com/aws/aws-cdk-go/awscdk/awslambda"
+	s3assets "github.com/aws/aws-cdk-go/awscdk/awss3assets"
 	"github.com/aws/jsii-runtime-go"
 )
 
 const AWSLambdaExecutionPath = "/asset-output/"
 
+type LambdaConstruct struct {
+	LambdaFunction lambda.Function
+	Scope          awscdk.Stack
+}
+
 func NewLambdaConstruct(
-	scope constructs.Construct,
+	scope awscdk.Stack,
 	name string,
-) constructs.Construct {
+) LambdaConstruct {
 	iamRole := iam.NewRole(
 		scope,
 		jsii.String(fmt.Sprintf("%sLambdaRole", name)),
@@ -29,7 +33,7 @@ func NewLambdaConstruct(
 		},
 	)
 
-	lambda.NewFunction(
+	graphQLAPIExecutorFunction := lambda.NewFunction(
 		scope,
 		jsii.String(fmt.Sprintf("%sLambdaConstruct", name)),
 		&lambda.FunctionProps{
@@ -64,5 +68,8 @@ func NewLambdaConstruct(
 		jsii.String("service-role/AWSLambdaVPCAccessExecutionRole"),
 	))
 
-	return scope
+	return LambdaConstruct{
+		LambdaFunction: graphQLAPIExecutorFunction,
+		Scope:          scope,
+	}
 }

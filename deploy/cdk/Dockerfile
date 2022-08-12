@@ -16,7 +16,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     && rm awscliv2.zip \
     && ./aws/install \
     && aws --version \
-    && npm install -g aws-cdk
+    && npm install -g aws-cdk@1.x
 
 # Intsalling Golang in Node Docker Image and adding it to PATH
 RUN curl "https://go.dev/dl/go1.19.linux-amd64.tar.gz" -L -o "go1.19.linux-amd64.tar.gz" \

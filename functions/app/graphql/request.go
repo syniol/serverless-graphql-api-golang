@@ -8,11 +8,6 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-type PostData struct {
-	Query     string                 `json:"query"`
-	Variables map[string]interface{} `json:"variables"`
-}
-
 func PostRequest(w http.ResponseWriter, req *http.Request, schema graphql.Schema) {
 	if req.Method != http.MethodPost {
 		w.WriteHeader(http.StatusBadRequest)

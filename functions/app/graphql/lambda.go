@@ -2,6 +2,7 @@ package graphql
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -9,22 +10,32 @@ import (
 )
 
 func NewLambda(
-	_ context.Context,
+	ctx context.Context,
 	request events.APIGatewayProxyRequest,
 ) (events.APIGatewayProxyResponse, error) {
-	fmt.Printf(
-		"Processing request data for request %s.\n",
-		request.RequestContext.RequestID,
-	)
-	fmt.Printf("Body size = %d.\n", len(request.Body))
-
-	fmt.Println("Headers:")
-	for key, value := range request.Headers {
-		fmt.Printf("%s: %s\n", key, value)
+	if request.HTTPMethod != http.MethodPost {
+		return events.APIGatewayProxyResponse{
+			Body:       "only POST method is accepted",
+			StatusCode: http.StatusBadRequest,
+		}, nil
 	}
 
+	fmt.Printf(
+		"Processing request for ID: %s.\n",
+		request.RequestContext.RequestID,
+	)
+
+	res, err := NewGraphQLExecution(ctx, Schema, request.Body)
+	if err != nil {
+		return events.APIGatewayProxyResponse{
+			Body:       err.Error(),
+			StatusCode: http.StatusBadRequest,
+		}, nil
+	}
+
+	body, _ := json.Marshal(res.Data)
 	return events.APIGatewayProxyResponse{
-		Body:       request.Body,
+		Body:       string(body),
 		StatusCode: http.StatusOK,
 	}, nil
 }

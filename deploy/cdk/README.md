@@ -19,3 +19,7 @@ lorem
  * `cdk diff`        compare deployed stack with current state
  * `cdk synth`       emits the synthesized CloudFormation template
  * `go test`         run unit tests
+
+
+### Useful Docs
+ * [AWS CDK Reference Documentation](https://docs.aws.amazon.com/cdk/api/v1/)
