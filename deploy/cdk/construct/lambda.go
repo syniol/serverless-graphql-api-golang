@@ -44,7 +44,7 @@ func NewLambdaConstruct(
 						Command: &[]*string{
 							jsii.String("bash"),
 							jsii.String("-c"),
-							jsii.String("go build -o /asset-output/main ./cmd/lambda/main.go"),
+							jsii.String("go mod vendor && go build -o /asset-output/main ./cmd/lambda/main.go"),
 						},
 					},
 				},

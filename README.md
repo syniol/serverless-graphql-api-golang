@@ -7,9 +7,6 @@ lambda we will also need to create an AWS API Gateway to trigger
 the deployed lambda.
 
 
-GOOS=linux GOARCH=amd64 go build -o lambdaHandler .
-
-`GOOS=linux GOARCH=amd64 go build -o ./cmd/lambda/main ./cmd/lambda/main.go`
 
 
 ## AWS Lambda & API GateWay
@@ -23,7 +20,6 @@ GOOS=linux GOARCH=amd64 go build -o lambdaHandler .
 * `AWS_SECRET`
 * `CDK_DEFAULT_ACCOUNT`
 * `CDK_DEFAULT_REGION`
-
 
 
 #### Credits
