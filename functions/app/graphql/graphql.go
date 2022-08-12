@@ -3,6 +3,7 @@ package graphql
 import (
 	"context"
 	"encoding/json"
+
 	"github.com/graphql-go/graphql"
 )
 
