@@ -16,7 +16,11 @@ func NewServerlessAPIStack(
 	construct.NewAPIGateWayConstruct(
 		stack,
 		"GraphQLExecutionAPI",
-		construct.NewLambdaConstruct(stack, "GraphQLExecution"),
+		construct.NewLambdaConstruct(
+			stack,
+			"GraphQLExecution",
+			construct.NewDynamoDBConstruct(stack, "GraphQLNoSQLDatabase"),
+		),
 	)
 
 	return stack

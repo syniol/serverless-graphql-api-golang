@@ -21,7 +21,8 @@ type LambdaConstruct struct {
 func NewLambdaConstruct(
 	scope awscdk.Stack,
 	name string,
-) LambdaConstruct {
+	dynamoDB *DynamoDBConstruct,
+) *LambdaConstruct {
 	iamRole := iam.NewRole(
 		scope,
 		jsii.String(fmt.Sprintf("%sLambdaRole", name)),
@@ -68,7 +69,21 @@ func NewLambdaConstruct(
 		jsii.String("service-role/AWSLambdaVPCAccessExecutionRole"),
 	))
 
-	return LambdaConstruct{
+	if dynamoDB != nil {
+		iamRole.AddToPolicy(iam.NewPolicyStatement(
+			&iam.PolicyStatementProps{
+				Effect: iam.Effect_ALLOW,
+				Actions: &[]*string{
+					jsii.String("dynamodb:*"),
+				},
+				Resources: &[]*string{
+					dynamoDB.Table.TableArn(),
+				},
+			},
+		))
+	}
+
+	return &LambdaConstruct{
 		LambdaFunction: graphQLAPIExecutorFunction,
 		Scope:          scope,
 	}
