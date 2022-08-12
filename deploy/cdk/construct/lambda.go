@@ -2,10 +2,12 @@ package construct
 
 import (
 	"fmt"
+	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"path/filepath"
 
 	iam "github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	lambda "github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
+	s3assets "github.com/aws/aws-cdk-go/awscdk/v2/awss3assets"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
 )
@@ -30,21 +32,21 @@ func NewLambdaConstruct(
 		jsii.String(fmt.Sprintf("%sLambdaConstruct", name)),
 		&lambda.FunctionProps{
 			Runtime: lambda.Runtime_GO_1_X(),
-			Handler: jsii.String("main"),
+			Handler: jsii.String("cmd/lambda/main"),
 			Code: lambda.AssetCode_FromAsset(
-				jsii.String(filepath.Join(".", "..", "..", "cmd", "lambda")),
-				nil,
-				//&s3assets.AssetOptions{
-				//	Bundling: &awscdk.BundlingOptions{
-				//		Image: lambda.Runtime_GO_1_X().BundlingImage(),
-				//		User:  jsii.String("root"),
-				//		Command: &[]*string{
-				//			jsii.String("bash"),
-				//			jsii.String("-c"),
-				//			jsii.String("go version && go build -o /asset-output/main"),
-				//		},
-				//	},
-				//},
+				jsii.String(filepath.Join(".", "..", "..", "functions")),
+				//nil,
+				&s3assets.AssetOptions{
+					Bundling: &awscdk.BundlingOptions{
+						Image: lambda.Runtime_GO_1_X().BundlingImage(),
+						User:  jsii.String("root"),
+						Command: &[]*string{
+							jsii.String("bash"),
+							jsii.String("-c"),
+							jsii.String("go version && go build -o /asset-output/main"),
+						},
+					},
+				},
 			),
 			Role: iamRole,
 		},

@@ -1,4 +1,5 @@
 # IaC with AWS CDK in Golang
+lorem
 
 
 ## Dev Setup Commands
@@ -9,11 +10,7 @@
  * `docker build -t cdk:node . -f deploy/cdk/Dockerfile --build-arg AWS_KEY=opwhb2232 --build-arg AWS_SECRET=7862ghhhgy3`
 
 
-## Build Args (Docker Image Pipeline to Deploy with CDK)
- * `AWS_KEY`
- * `AWS_SECRET`
- * `CDK_DEFAULT_ACCOUNT`
- * `CDK_DEFAULT_REGION`
+
 
 
 ## Useful commands

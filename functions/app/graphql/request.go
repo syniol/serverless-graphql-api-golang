@@ -3,8 +3,9 @@ package graphql
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/graphql-go/graphql"
 	"net/http"
+
+	"github.com/graphql-go/graphql"
 )
 
 type PostData struct {

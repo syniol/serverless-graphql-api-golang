@@ -53,6 +53,5 @@ WORKDIR /var/local/pipeline/deploy/cdk
 # Deploying all Stacks using AWS CDK
 RUN go mod download \
     && cdk doctor \
-    && cdk synth \
     && cdk bootstrap \
     && cdk deploy --all --require-approval never

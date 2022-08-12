@@ -16,6 +16,13 @@ GOOS=linux GOARCH=amd64 go build -o lambdaHandler .
 ## AWS CDK
 
 
+### Build Args (Docker Image Pipeline to Deploy with CDK)
+* `AWS_KEY`
+* `AWS_SECRET`
+* `CDK_DEFAULT_ACCOUNT`
+* `CDK_DEFAULT_REGION`
 
-### Credits
+
+
+#### Credits
 Copyright &copy; 2022 Syniol Limited. All Rights Reserved.
