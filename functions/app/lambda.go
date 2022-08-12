@@ -15,6 +15,11 @@ func NewLambda(
 	ctx context.Context,
 	request events.APIGatewayProxyRequest,
 ) (events.APIGatewayProxyResponse, error) {
+	fmt.Printf(
+		"Processing request for ID: %s.\n",
+		request.RequestContext.RequestID,
+	)
+
 	if request.HTTPMethod != http.MethodPost {
 		return events.APIGatewayProxyResponse{
 			Body:       "only POST method is accepted",
@@ -22,20 +27,26 @@ func NewLambda(
 		}, nil
 	}
 
-	fmt.Printf(
-		"Processing request for ID: %s.\n",
-		request.RequestContext.RequestID,
-	)
-
 	res, err := graphql.NewGraphQLExecution(ctx, graphql.Schema, request.Body)
 	if err != nil {
+		fmt.Println("error at NewGraphQLExecution method", err.Error())
+
 		return events.APIGatewayProxyResponse{
-			Body:       err.Error(),
+			Body:       "malformed request",
 			StatusCode: http.StatusBadRequest,
 		}, nil
 	}
 
-	body, _ := json.Marshal(res.Data)
+	body, err := json.Marshal(res.Data)
+	if err != nil {
+		fmt.Println("error marshal graphql response.Data", err.Error())
+
+		return events.APIGatewayProxyResponse{
+			Body:       "error transforming result back to client",
+			StatusCode: http.StatusInternalServerError,
+		}, nil
+	}
+
 	return events.APIGatewayProxyResponse{
 		Body:       string(body),
 		StatusCode: http.StatusOK,

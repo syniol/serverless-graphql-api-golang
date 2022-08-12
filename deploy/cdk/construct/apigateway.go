@@ -1,8 +1,8 @@
 package construct
 
 import (
-	"github.com/aws/aws-cdk-go/awscdk"
-	apigateway "github.com/aws/aws-cdk-go/awscdk/awsapigateway"
+	"github.com/aws/aws-cdk-go/awscdk/v2"
+	apigateway "github.com/aws/aws-cdk-go/awscdk/v2/awsapigateway"
 	"github.com/aws/jsii-runtime-go"
 )
 
