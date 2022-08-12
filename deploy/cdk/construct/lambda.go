@@ -36,7 +36,6 @@ func NewLambdaConstruct(
 			Handler:      jsii.String("main"),
 			Code: lambda.AssetCode_FromAsset(
 				jsii.String(filepath.Join(".", "..", "..", "functions")),
-				//nil,
 				&s3assets.AssetOptions{
 					Bundling: &awscdk.BundlingOptions{
 						Image: lambda.Runtime_GO_1_X().BundlingImage(),
