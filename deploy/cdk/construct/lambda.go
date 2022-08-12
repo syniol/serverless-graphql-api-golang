@@ -2,15 +2,17 @@ package construct
 
 import (
 	"fmt"
-	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"path/filepath"
 
+	"github.com/aws/aws-cdk-go/awscdk/v2"
 	iam "github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	lambda "github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
 	s3assets "github.com/aws/aws-cdk-go/awscdk/v2/awss3assets"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
 )
+
+const AWSLambdaExecutionPath = "/asset-output/"
 
 func NewLambdaConstruct(
 	scope constructs.Construct,
@@ -43,7 +45,10 @@ func NewLambdaConstruct(
 						Command: &[]*string{
 							jsii.String("bash"),
 							jsii.String("-c"),
-							jsii.String("go mod vendor && go build -o /asset-output/main ./cmd/lambda/main.go"),
+							jsii.String(fmt.Sprintf(
+								"go mod vendor && go build -o %smain ./cmd/lambda/main.go",
+								AWSLambdaExecutionPath,
+							)),
 						},
 					},
 				},
