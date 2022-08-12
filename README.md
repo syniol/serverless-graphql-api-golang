@@ -9,6 +9,8 @@ the deployed lambda.
 
 GOOS=linux GOARCH=amd64 go build -o lambdaHandler .
 
+`GOOS=linux GOARCH=amd64 go build -o ./cmd/lambda/main ./cmd/lambda/main.go`
+
 
 ## AWS Lambda & API GateWay
 

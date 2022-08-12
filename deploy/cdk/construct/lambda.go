@@ -2,12 +2,11 @@ package construct
 
 import (
 	"fmt"
-	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"path/filepath"
 
 	iam "github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	lambda "github.com/aws/aws-cdk-go/awscdk/v2/awslambda"
-	s3assets "github.com/aws/aws-cdk-go/awscdk/v2/awss3assets"
+	//s3assets "github.com/aws/aws-cdk-go/awscdk/v2/awss3assets"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
 )
@@ -31,22 +30,25 @@ func NewLambdaConstruct(
 		scope,
 		jsii.String(fmt.Sprintf("%sLambdaConstruct", name)),
 		&lambda.FunctionProps{
-			Runtime: lambda.Runtime_GO_1_X(),
-			Handler: jsii.String("cmd/lambda/main"),
+			FunctionName: jsii.String("GraphQLAPIExecutorFunction"),
+			Runtime:      lambda.Runtime_GO_1_X(),
+			Handler:      jsii.String("main"),
 			Code: lambda.AssetCode_FromAsset(
-				jsii.String(filepath.Join(".", "..", "..", "functions")),
-				//nil,
-				&s3assets.AssetOptions{
-					Bundling: &awscdk.BundlingOptions{
-						Image: lambda.Runtime_GO_1_X().BundlingImage(),
-						User:  jsii.String("root"),
-						Command: &[]*string{
-							jsii.String("bash"),
-							jsii.String("-c"),
-							jsii.String("go version && go build -o /asset-output/main"),
-						},
-					},
-				},
+				jsii.String(filepath.Join(".", "..", "..", "functions", "cmd", "lambda")),
+				nil,
+				//&s3assets.AssetOptions{
+				//	Bundling: &awscdk.BundlingOptions{
+				//		Image: lambda.Runtime_GO_1_X().BundlingImage(),
+				//		User:  jsii.String("root"),
+				//		Command: &[]*string{
+				//			jsii.String("bash"),
+				//			jsii.String("-c"),
+				//			jsii.String("go version"),
+				//			jsii.String("go mod download && go mod vendor"),
+				//			jsii.String("go build -o /asset-output/main cmd/lambda/main.go"),
+				//		},
+				//	},
+				//},
 			),
 			Role: iamRole,
 		},
