@@ -14,7 +14,10 @@ create an AWS API Gateway to trigger the deployed lambda.
 
 
 ## AWS Lambda & API Gateway
-todo: add information about trigger point
+When client sends an HTTP(s) request to public endpoint of AWS API Gateway; 
+it will trigger an AWS State Machine which has a definition of Lambda execution. 
+We could have Authorizer Lambda to be triggered when initial lambda in triggered. 
+Please look at Architecture Diagram for Step Functions Workflow.
 
 
 ## AWS CDK

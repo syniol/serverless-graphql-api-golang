@@ -33,7 +33,7 @@ type StepFunctionsRestApiProps struct {
   }
 }
 ```
-**Example of JSON for  Step Functions Props Struct Definition**:
+**Example of YAML for  Step Functions Props Struct Definition**:
 
 ```yaml
 defaultCorsPreflightOptions:
