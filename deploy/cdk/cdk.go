@@ -17,7 +17,9 @@ func main() {
 	stack.NewServerlessAPIStack(
 		app,
 		"ServerlessGraphQLAPIStack",
-		nil,
+		&awscdk.StackProps{
+			Env: env(),
+		},
 	)
 
 	app.Synth(nil)

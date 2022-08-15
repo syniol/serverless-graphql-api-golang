@@ -19,8 +19,12 @@ func NewServerlessAPIStack(
 		construct.NewLambdaConstruct(
 			stack,
 			"GraphQLExecution",
-			construct.NewDynamoDBConstruct(stack, "GraphQLNoSQLDatabase"),
+			nil,
+			//construct.NewDynamoDBConstruct(stack, "GraphQLNoSQLDatabase"),
+			nil,
+			construct.NewNeptuneConstruct(stack, "GraphQLNoSQLDatabase", nil, nil),
 		),
+		nil,
 	)
 
 	return stack
