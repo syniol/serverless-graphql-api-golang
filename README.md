@@ -8,7 +8,9 @@ create an AWS API Gateway to trigger the deployed lambda.
 
 
 ## Architecture
-todo: add Diagram
+<p style="text-align: center;">
+    <img src="https://raw.githubusercontent.com/syniol/serverless-graphql-api-golang/main/docs/diagram/serverless-arch.png" alt="Diagram of Architecture">
+</p>
 
 
 ## AWS Lambda & API Gateway
